@@ -6,14 +6,15 @@ public class Box {
     double height;
     double depth;
 
+    public Box(double width, double height, double depth) {
+        this.width = width;
+        this.height = height;
+        this.depth = depth;
+    }
+
     double volume() {
         return width * height * depth;
     }
 
-    void setDim(double w, double h, double d) {
-        width = w;
-        height = h;
-        depth = d;
-    }
 
 }

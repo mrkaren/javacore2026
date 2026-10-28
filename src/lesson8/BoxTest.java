@@ -4,14 +4,13 @@ public class BoxTest {
 
     public static void main(String[] args) {
 
-        Box myBox = new Box();
-        myBox.setDim(1, 3, 6);
+        Box myBox = new Box(10, 20, 30);
 
-        double volume = myBox.volume();
-        double doubleVolume = volume * 2;
+        Box myBox2 = new Box(1, 3, 5);
 
-        System.out.println(volume);
-        System.out.println(doubleVolume);
+
+
+
 
 
     }

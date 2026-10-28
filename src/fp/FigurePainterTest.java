@@ -7,6 +7,8 @@ public class FigurePainterTest {
         FigurePainter fp = new FigurePainter();
         fp.figure1('$', 5);
         fp.figure1('&', 9);
-        fp.figure1('T', 20);
+//        fp.figure1('T', 20);
+
+        fp.figure4();
     }
 }
