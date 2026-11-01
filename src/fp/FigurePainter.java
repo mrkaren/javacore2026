@@ -15,6 +15,18 @@ public class FigurePainter {
         }
     }
 
+    void figure1() {
+        figure1('*', 5);
+    }
+
+    void figure1(int n) {
+        figure1('*', n);
+    }
+
+    void figure1(char c) {
+        figure1(c, 5);
+    }
+
 
     void figure2() {
         for (int i = 5; i > 0; i--) {

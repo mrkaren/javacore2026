@@ -11,15 +11,9 @@ public class StackTest {
 
         stack.push(3);
 
-        stack.push(7);
+        System.out.println(stack.getTos());
 
-        stack.push(2);
-        stack.push(2);
-        stack.push(2);
-        stack.push(2);
-        stack.push(2);
-        stack.push(8);
-        stack.push(5);
+        stack.pop();
 
     }
 

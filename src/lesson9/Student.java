@@ -15,6 +15,10 @@ public class Student {
         this.course = course;
     }
 
+    Student() {
+
+    }
+
     @Override
     public String toString() {
         return "Student{" +
