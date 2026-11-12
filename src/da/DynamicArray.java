@@ -14,9 +14,7 @@ public class DynamicArray {
 
     private void extend() {
         int[] tmp = new int[array.length + 10];
-        for (int i = 0; i < array.length; i++) {
-            tmp[i] = array[i];
-        }
+        System.arraycopy(array, 0, tmp, 0, array.length);
         array = tmp;
     }
 

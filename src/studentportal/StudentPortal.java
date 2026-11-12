@@ -1,11 +1,20 @@
 package studentportal;
 
+import studentportal.model.Student;
+import studentportal.storage.StudentStorage;
+
 import java.util.Scanner;
 
 public class StudentPortal {
 
     private static Scanner scanner = new Scanner(System.in);
     private static StudentStorage studentStorage = new StudentStorage();
+
+    private static final String EXIT = "0";
+    private static final String ADD_STUDENT = "1";
+    private static final String PRINT_ALL_STUDENTS = "2";
+    private static final String SEARCH_STUDENTS = "3";
+    private static final String SEARCH_STUDENTS_BY_COURSE = "4";
 
     public static void main(String[] args) {
         boolean isRun = true;
@@ -15,19 +24,19 @@ public class StudentPortal {
 
             String command = scanner.nextLine();
             switch (command) {
-                case "0":
+                case EXIT:
                     isRun = false;
                     break;
-                case "1":
+                case ADD_STUDENT:
                     addStudent();
                     break;
-                case "2":
+                case PRINT_ALL_STUDENTS:
                     studentStorage.print();
                     break;
-                case "3":
+                case SEARCH_STUDENTS:
                     searchStudent();
                     break;
-                case "4":
+                case SEARCH_STUDENTS_BY_COURSE:
                     searchStudentByCourse();
                     break;
                 default:
@@ -38,11 +47,11 @@ public class StudentPortal {
     }
 
     private static void printCommands() {
-        System.out.println("Please input 0 for EXIT");
-        System.out.println("Please input 1 for add Student");
-        System.out.println("Please input 2 for print all Students");
-        System.out.println("Please input 3 for search Student");
-        System.out.println("Please input 4 for search Student by course");
+        System.out.println("Please input " + EXIT + " for EXIT");
+        System.out.println("Please input " + ADD_STUDENT + " for add Student");
+        System.out.println("Please input " + PRINT_ALL_STUDENTS + " for print all Students");
+        System.out.println("Please input " + SEARCH_STUDENTS + " for search Student");
+        System.out.println("Please input " + SEARCH_STUDENTS_BY_COURSE + " for search Student by course");
     }
 
     private static void searchStudentByCourse() {

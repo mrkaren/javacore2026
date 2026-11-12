@@ -1,5 +1,7 @@
 package lesson9;
 
+import java.util.Objects;
+
 public class Student {
 
     public String name;
@@ -7,16 +9,47 @@ public class Student {
     public String phone;
     public String course;
 
-    Student(String name, String surname, String phone,
-            String course) {
+    public Student(String name, String surname, String phone,
+                   String course) {
         this.name = name;
         this.surname = surname;
         this.phone = phone;
         this.course = course;
     }
 
-    Student() {
+    public Student() {
 
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || obj.getClass() != getClass()) {
+            return false;
+        }
+        Student st = (Student) obj;
+
+        if (name != null && !name.equals(st.name)) {
+            return false;
+        }
+        if (surname != null && !surname.equals(st.surname)) {
+            return false;
+        }
+        if (phone != null && !phone.equals(st.phone)) {
+            return false;
+        }
+        if (course != null && !course.equals(st.course)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hashCode(name);
+        result = 31 * result + Objects.hashCode(surname);
+        result = 31 * result + Objects.hashCode(phone);
+        result = 31 * result + Objects.hashCode(course);
+        return result;
     }
 
     @Override

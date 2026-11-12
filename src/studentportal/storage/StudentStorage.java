@@ -1,4 +1,6 @@
-package studentportal;
+package studentportal.storage;
+
+import studentportal.model.Student;
 
 public class StudentStorage {
 
@@ -14,9 +16,7 @@ public class StudentStorage {
 
     private void extend() {
         Student[] tmp = new Student[array.length + 10];
-        for (int i = 0; i < array.length; i++) {
-            tmp[i] = array[i];
-        }
+        System.arraycopy(array, 0, tmp, 0, array.length);
         array = tmp;
     }
 

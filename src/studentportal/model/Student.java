@@ -1,4 +1,8 @@
-package studentportal;
+package studentportal.model;
+
+
+import java.util.Objects;
+
 
 public class Student {
 
@@ -49,6 +53,18 @@ public class Student {
 
     public void setCourse(String course) {
         this.course = course;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return Objects.equals(name, student.name) && Objects.equals(surname, student.surname) && Objects.equals(phone, student.phone) && Objects.equals(course, student.course);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, surname, phone, course);
     }
 
     @Override
