@@ -1,5 +1,6 @@
 package studentportal.storage;
 
+import studentportal.model.Course;
 import studentportal.model.Student;
 
 public class StudentStorage {
@@ -29,7 +30,7 @@ public class StudentStorage {
 
     public void print() {
         for (int i = 0; i < size; i++) {
-            System.out.print(array[i] + " ");
+            System.out.println(array[i] + " ");
         }
         System.out.println();
     }
@@ -43,9 +44,9 @@ public class StudentStorage {
         }
     }
 
-    public void searchByCourse(String course) {
+    public void searchByCourse(Course course) {
         for (int i = 0; i < size; i++) {
-            if (array[i].getCourse().equalsIgnoreCase(course)) {
+            if (array[i].getCourse().equals(course)) {
                 System.out.println(array[i] + " ");
             }
         }

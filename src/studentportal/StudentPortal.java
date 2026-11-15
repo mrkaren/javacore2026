@@ -1,26 +1,29 @@
 package studentportal;
 
+import studentportal.model.Course;
 import studentportal.model.Student;
+import studentportal.storage.CourseStorage;
 import studentportal.storage.StudentStorage;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
-public class StudentPortal {
+public class StudentPortal implements Commands {
 
     private static Scanner scanner = new Scanner(System.in);
     private static StudentStorage studentStorage = new StudentStorage();
+    private static CourseStorage courseStorage = new CourseStorage();
 
-    private static final String EXIT = "0";
-    private static final String ADD_STUDENT = "1";
-    private static final String PRINT_ALL_STUDENTS = "2";
-    private static final String SEARCH_STUDENTS = "3";
-    private static final String SEARCH_STUDENTS_BY_COURSE = "4";
+    public static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws ParseException {
         boolean isRun = true;
+        initData();
 
         while (isRun) {
-            printCommands();
+            Commands.printCommands();
 
             String command = scanner.nextLine();
             switch (command) {
@@ -39,6 +42,12 @@ public class StudentPortal {
                 case SEARCH_STUDENTS_BY_COURSE:
                     searchStudentByCourse();
                     break;
+                case ADD_COURSE:
+                    addCourse();
+                    break;
+                case PRINT_ALL_COURSES:
+                    courseStorage.print();
+                    break;
                 default:
                     System.out.println("command not found!");
 
@@ -46,17 +55,49 @@ public class StudentPortal {
         }
     }
 
-    private static void printCommands() {
-        System.out.println("Please input " + EXIT + " for EXIT");
-        System.out.println("Please input " + ADD_STUDENT + " for add Student");
-        System.out.println("Please input " + PRINT_ALL_STUDENTS + " for print all Students");
-        System.out.println("Please input " + SEARCH_STUDENTS + " for search Student");
-        System.out.println("Please input " + SEARCH_STUDENTS_BY_COURSE + " for search Student by course");
+    private static void initData() throws ParseException {
+        Course php = new Course("php", "poxos teacher", 12.3, sdf.parse("16/11/2026"));
+        Course js = new Course("js", "petros teacher", 12.3, sdf.parse("20/11/2026"));
+
+        courseStorage.add(php, js);
+
+        Student student1 = new Student("poxos student", "poxosyan", "098222222", php);
+        Student student2 = new Student("petros student", "petrosyan", "0983333333", js);
+
+        studentStorage.add(student1);
+        studentStorage.add(student2);
+
+    }
+
+    private static void addCourse() throws ParseException {
+        System.out.println("Please input course name,teacherName,price,startDate(dd/MM/yyyy)");
+
+        String courseDataStr = scanner.nextLine();
+        String[] courseDataArr = courseDataStr.split(",");
+
+        Course course = new Course();
+        course.setName(courseDataArr[0]);
+        course.setTeacherName(courseDataArr[1]);
+        course.setPrice(Double.parseDouble(courseDataArr[2]));
+        course.setStartDate(sdf.parse(courseDataArr[3]));
+
+        courseStorage.add(course);
+
+        System.out.println("Course added!");
+
     }
 
     private static void searchStudentByCourse() {
-        System.out.println("Please input course");
-        String course = scanner.nextLine();
+        System.out.println("please choose course from list");
+        courseStorage.print();
+
+        String courseName = scanner.nextLine();
+        Course course = courseStorage.getCourseByName(courseName);
+        if (course == null) {
+            System.out.println("please input valid course name");
+            return;
+        }
+
         studentStorage.searchByCourse(course);
     }
 
@@ -67,18 +108,28 @@ public class StudentPortal {
     }
 
     private static void addStudent() {
-        System.out.println("Please input name,surname,phone,course");
+        System.out.println("please choose course from list");
+        courseStorage.print();
+
+        String courseName = scanner.nextLine();
+        Course course = courseStorage.getCourseByName(courseName);
+        if (course == null) {
+            System.out.println("please input valid course name");
+            return;
+        }
+
+        System.out.println("Please input name,surname,phone");
         String studentDataStr = scanner.nextLine();
         String[] studentDataArr = studentDataStr.split(",");
+
 
         Student student = new Student(studentDataArr[0],
                 studentDataArr[1],
                 studentDataArr[2],
-                studentDataArr[3]);
+                course);
 
         studentStorage.add(student);
         System.out.println("Student added!!!");
 
     }
-
 }

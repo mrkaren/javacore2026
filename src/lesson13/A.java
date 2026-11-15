@@ -7,7 +7,7 @@ public class A implements MyInterface{
         System.out.println("meth 1 hello");
     }
 
-    public void meth2(){
+    public void meth2() {
         System.out.println("hello from meth 2");
     }
 }

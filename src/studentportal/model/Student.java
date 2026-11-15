@@ -9,10 +9,10 @@ public class Student {
     private String name;
     private String surname;
     private String phone;
-    private String course;
+    private Course course;
 
     public Student(String name, String surname, String phone,
-            String course) {
+            Course course) {
         this.name = name;
         this.surname = surname;
         this.phone = phone;
@@ -47,24 +47,29 @@ public class Student {
         this.phone = phone;
     }
 
-    public String getCourse() {
+    public Course getCourse() {
         return course;
     }
 
-    public void setCourse(String course) {
+    public void setCourse(Course course) {
         this.course = course;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
+
         Student student = (Student) o;
         return Objects.equals(name, student.name) && Objects.equals(surname, student.surname) && Objects.equals(phone, student.phone) && Objects.equals(course, student.course);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, surname, phone, course);
+        int result = Objects.hashCode(name);
+        result = 31 * result + Objects.hashCode(surname);
+        result = 31 * result + Objects.hashCode(phone);
+        result = 31 * result + Objects.hashCode(course);
+        return result;
     }
 
     @Override
@@ -73,7 +78,7 @@ public class Student {
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", phone='" + phone + '\'' +
-                ", course='" + course + '\'' +
+                ", course=" + course +
                 '}';
     }
 }
