@@ -3,7 +3,7 @@ package studentportal.storage;
 import studentportal.model.Course;
 import studentportal.model.Student;
 
-public class StudentStorage {
+public class StudentStorage implements IStudentStorage {
 
     private Student[] array = new Student[10];
     private int size = 0;

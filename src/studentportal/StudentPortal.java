@@ -7,6 +7,7 @@ import studentportal.storage.StudentStorage;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class StudentPortal implements Commands {
@@ -69,7 +70,7 @@ public class StudentPortal implements Commands {
 
     }
 
-    private static void addCourse() throws ParseException {
+    private static void addCourse() {
         System.out.println("Please input course name,teacherName,price,startDate(dd/MM/yyyy)");
 
         String courseDataStr = scanner.nextLine();
@@ -78,8 +79,22 @@ public class StudentPortal implements Commands {
         Course course = new Course();
         course.setName(courseDataArr[0]);
         course.setTeacherName(courseDataArr[1]);
-        course.setPrice(Double.parseDouble(courseDataArr[2]));
-        course.setStartDate(sdf.parse(courseDataArr[3]));
+        double price;
+        try {
+            price = Double.parseDouble(courseDataArr[2]);
+        } catch (NumberFormatException e) {
+            price = 0;
+        }
+        course.setPrice(price);
+
+        Date startDate;
+        try {
+            startDate = sdf.parse(courseDataArr[3]);
+        } catch (ParseException e) {
+            System.out.println("Date format is invalid. Start date will be null");
+            startDate = null;
+        }
+        course.setStartDate(startDate);
 
         courseStorage.add(course);
 
